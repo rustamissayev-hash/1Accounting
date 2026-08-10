@@ -1,0 +1,59 @@
+quarkus:
+  application:
+    name: 1Accounting
+    version: 1.0.0-SNAPSHOT
+
+  http:
+    port: 8080
+    cors:
+      enabled: true
+      origins: "*"
+      methods: "GET,POST,PUT,DELETE,OPTIONS"
+      headers: "accept,authorization,content-type,x-requested-with"
+
+  neo4j:
+    uri: bolt://127.0.0.1:7687
+    authentication:
+      enabled: false
+
+  kafka:
+    devservices:
+      enabled: false
+    bootstrap:
+      servers: localhost:9092
+
+  security:
+    users:
+      tomiris:
+        password: ${USER_TOMIRIS_PASSWORD:changeme}
+        roles: admin,accountant
+      almansur:
+        password: ${USER_ALMANSUR_PASSWORD:changeme}
+        roles: admin,accountant
+      almira:
+        password: ${USER_ALMIRA_PASSWORD:changeme}
+        roles: admin,accountant
+
+  qute:
+    suffixes: html,qute.html
+
+  log:
+    category:
+      "com.isayev.accounting":
+        level: INFO
+      "org.neo4j":
+        level: WARN
+
+accounting:
+  app:
+    default-language: ru
+    supported-languages: ru,kz,en
+    country: KZ
+
+  smallrye-openapi:
+    info-title: 1Accounting API
+    info-version: 1.0.0
+    info-description: API для автоматизации бухгалтерии и отчётности
+    info-contact-name: Isayev Team
+    info-contact-email: rustam.issayev@gmail.com
+    info-license-name: Apache 2.0
