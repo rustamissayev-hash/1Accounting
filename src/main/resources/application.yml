@@ -11,11 +11,6 @@ quarkus:
       methods: "GET,POST,PUT,DELETE,OPTIONS"
       headers: "accept,authorization,content-type,x-requested-with"
 
-  neo4j:
-    uri: bolt://127.0.0.1:7687
-    authentication:
-      enabled: false
-
   kafka:
     devservices:
       enabled: false
@@ -44,12 +39,6 @@ quarkus:
       "org.neo4j":
         level: WARN
 
-accounting:
-  app:
-    default-language: ru
-    supported-languages: ru,kz,en
-    country: KZ
-
   smallrye-openapi:
     info-title: 1Accounting API
     info-version: 1.0.0
@@ -57,3 +46,17 @@ accounting:
     info-contact-name: Isayev Team
     info-contact-email: rustam.issayev@gmail.com
     info-license-name: Apache 2.0
+
+accounting:
+  app:
+    default-language: ru
+    supported-languages: ru,kz,en
+    country: KZ
+
+# Neo4j OGM Configuration
+neo4j:
+  ogm:
+    uri: bolt://127.0.0.1:7687
+    connection:
+      pool:
+        size: 50
