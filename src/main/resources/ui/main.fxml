@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.isayev.accounting.ui.controller.MainController">
+
+    <!-- Верхнее меню -->
+    <top>
+        <MenuBar>
+            <Menu text="Файл">
+                <MenuItem text="Обновить" onAction="#handleRefresh"/>
+                <SeparatorMenuItem/>
+                <MenuItem text="Выход" onAction="#handleExit"/>
+            </Menu>
+            <Menu text="Модули">
+                <MenuItem text="Учётная политика"/>
+                <MenuItem text="Налоговая политика"/>
+                <MenuItem text="Документы"/>
+                <MenuItem text="Отчёты"/>
+            </Menu>
+            <Menu text="Справка">
+                <MenuItem text="О программе"/>
+            </Menu>
+        </MenuBar>
+    </top>
+
+    <!-- Левая панель — дерево модулей -->
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Label text="Навигация" styleClass="sidebar-title">
+                <font>
+                    <Font name="System Bold" size="14"/>
+                </font>
+            </Label>
+            <TreeView fx:id="moduleTree" VBox.vgrow="ALWAYS" prefWidth="250"/>
+        </VBox>
+    </left>
+
+    <!-- Центр — основная рабочая область -->
+    <center>
+        <VBox spacing="10" styleClass="content-area">
+            <padding>
+                <Insets top="15" right="15" bottom="15" left="15"/>
+            </padding>
+            <Label text="Добро пожаловать в 1Accounting" styleClass="welcome-title">
+                <font>
+                    <Font name="System Bold" size="18"/>
+                </font>
+            </Label>
+            <Label text="Выберите модуль в левой панели для начала работы." wrapText="true"/>
+            <Label text="Доступные возможности:" styleClass="section-title">
+                <font>
+                    <Font name="System Bold" size="12"/>
+                </font>
+            </Label>
+            <VBox spacing="5">
+                <Label text="• Учётная политика и план счетов"/>
+                <Label text="• Налоговая политика и отчётность"/>
+                <Label text="• Управление документами с ЭЦП"/>
+                <Label text="• Управленческие отчёты"/>
+                <Label text="• Календарь налоговых событий"/>
+                <Label text="• Интеграция с платными сервисами"/>
+            </VBox>
+        </VBox>
+    </center>
+
+    <!-- Низ — статусная панель -->
+    <bottom>
+        <HBox spacing="15" styleClass="status-bar" alignment="CENTER_LEFT">
+            <padding>
+                <Insets top="5" right="15" bottom="5" left="15"/>
+            </padding>
+            <Label fx:id="statusLabel" text="Подключение..."/>
+            <Label text="|"/>
+            <Label fx:id="userLabel" text="Пользователь: —"/>
+            <Label text="|" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="timeLabel" text="—"/>
+        </HBox>
+    </bottom>
+</BorderPane>
