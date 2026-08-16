@@ -1,6 +1,5 @@
 package com.isayev.accounting.security;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 
 import java.security.*;
@@ -11,9 +10,9 @@ import java.util.Base64;
 /**
  * Реализация цифровой подписи через ECDSA (международный стандарт).
  * Используется для тестирования и для систем без казахстанских токенов.
+ * НЕ является CDI bean — создаётся через EcpConfig Producer.
  */
 @Slf4j
-@ApplicationScoped
 public class EcdsaSignatureService implements DigitalSignatureService {
 
     private static final String ALGORITHM = "EC";
