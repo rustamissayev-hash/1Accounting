@@ -1,6 +1,5 @@
 package com.isayev.accounting.security;
 
-import jakarta.enterprise.context.ApplicationScoped;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayInputStream;
@@ -11,6 +10,7 @@ import java.util.Base64;
 
 /**
  * Сервис для работы с казахстанской ЭЦП (ГОСТ Р 34.10-2012).
+ * НЕ является CDI bean — создаётся через EcpConfig Producer.
  * 
  * Требования для работы:
  * 1. Установить KalkanCrypt SDK (JAVA) от НУЦ РК
@@ -21,7 +21,6 @@ import java.util.Base64;
  * Документация: https://pki.gov.kz/
  */
 @Slf4j
-@ApplicationScoped
 public class KazakhstanEcpService implements DigitalSignatureService {
 
     // private KalkanCrypt kalkan; // Раскомментировать после подключения KalkanCrypt SDK
