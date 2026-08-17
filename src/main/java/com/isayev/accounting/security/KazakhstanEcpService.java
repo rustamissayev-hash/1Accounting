@@ -1,6 +1,7 @@
 package com.isayev.accounting.security;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.security.cert.CertificateFactory;
@@ -20,8 +21,9 @@ import java.util.Base64;
  * 
  * Документация: https://pki.gov.kz/
  */
-@Slf4j
 public class KazakhstanEcpService implements DigitalSignatureService {
+
+    private static final Logger log = LoggerFactory.getLogger(KazakhstanEcpService.class);
 
     // private KalkanCrypt kalkan; // Раскомментировать после подключения KalkanCrypt SDK
 
