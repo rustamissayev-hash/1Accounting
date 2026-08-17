@@ -2,7 +2,8 @@ package com.isayev.accounting.ui.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,8 +17,9 @@ import java.util.concurrent.CompletableFuture;
  * HTTP клиент для связи с Quarkus Backend.
  * Использует встроенный java.net.http.HttpClient (JDK 11+).
  */
-@Slf4j
 public class ApiClient {
+
+    private static final Logger log = LoggerFactory.getLogger(ApiClient.class);
 
     private static final String BASE_URL = "http://localhost:8080/api/v1";
     private final HttpClient httpClient;
@@ -39,7 +41,17 @@ public class ApiClient {
 
     public CompletableFuture<Boolean> loginAsync(String username, String password) {
         setCredentials(username, password);
-        return healthCheckAsync();
+        // Проверяем реальную авторизацию через защищённый endpoint
+        return sendGetAsync("/documents")
+                .thenApply(response -> {
+                    int code = response.statusCode();
+                    log.info("Login check: HTTP {}", code);
+                    return code == 200; // 401 = неверный пароль, 200 = OK
+                })
+                .exceptionally(ex -> {
+                    log.error("Login check failed: {}", ex.getMessage());
+                    return false;
+                });
     }
 
     public CompletableFuture<Boolean> healthCheckAsync() {
