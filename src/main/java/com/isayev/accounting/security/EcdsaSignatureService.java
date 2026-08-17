@@ -1,6 +1,7 @@
 package com.isayev.accounting.security;
 
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.*;
 import java.security.spec.ECGenParameterSpec;
@@ -12,8 +13,9 @@ import java.util.Base64;
  * Используется для тестирования и для систем без казахстанских токенов.
  * НЕ является CDI bean — создаётся через EcpConfig Producer.
  */
-@Slf4j
 public class EcdsaSignatureService implements DigitalSignatureService {
+
+    private static final Logger log = LoggerFactory.getLogger(EcdsaSignatureService.class);
 
     private static final String ALGORITHM = "EC";
     private static final String SIGNATURE_ALGORITHM = "SHA256withECDSA";
